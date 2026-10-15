@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pet Care System</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<style>
+body {
+    font-family: Arial;
+    background-color: lightyellow;
+    margin: 20px;
+}
+h2 {
+    color: brown;
+}
+.box {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid brown;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+
+    // 1. Pet Care Budget Calculator
+    $("#budgetBtn").click(function(){
+        let amount = Number($("#amount").val());
+        let f = Number($("#foodPercent").val());
+        let g = Number($("#groom").val());
+        let m = Number($("#medical").val());
+        let s = Number($("#saving").val());
+
+        if(amount <= 0 || f + g + m + s != 100){
+            alert("Enter a valid budget and percentages totaling 100");
+        }
+        else {
+            $("#budgetResult").html(
+                "Food: Rs." + amount*f/100 + "<br>" +
+                "Grooming: Rs." + amount*g/100 + "<br>" +
+                "Medical: Rs." + amount*m/100 + "<br>" +
+                "Savings: Rs." + amount*s/100
+            );
+        }
+    });
+
+    // 2. Pet Food Order
+    $("#orderBtn").click(function(){
+        let price = Number($("#foodType").val());
+        let qty = Number($("#qty").val());
+
+        if(qty <= 0){
+            alert("Enter a valid quantity");
+        }
+        else {
+            $("#orderResult").html("Total Amount: Rs." + price*qty);
+        }
+    });
+
+    // 3. Pet Appearance Customizer
+    $("#petColor").change(function(){
+        $("#pet").css("color", $(this).val());
+    });
+
+    $("#collarColor").change(function(){
+        $("#pet").css("background-color", $(this).val());
+    });
+
+    $("#petSize").change(function(){
+        $("#pet").css("font-size", $(this).val() + "px");
+    });
+
+});
+</script>
+</head>
+
+<body>
+
+<h1>Pet Care System</h1>
+
+<div class="box">
+<h2>1. Pet Care Budget Calculator</h2>
+
+Total Budget: <input type="number" id="amount"><br><br>
+Food (%): <input type="number" id="foodPercent"><br><br>
+Grooming (%): <input type="number" id="groom"><br><br>
+Medical (%): <input type="number" id="medical"><br><br>
+Savings (%): <input type="number" id="saving"><br><br>
+
+<button id="budgetBtn">Calculate Budget</button>
+<p id="budgetResult"></p>
+</div>
+
+<div class="box">
+<h2>2. Pet Food Order</h2>
+
+Select Food:
+<select id="foodType">
+<option value="100">Dog Food - Rs.100</option>
+<option value="150">Cat Food - Rs.150</option>
+<option value="80">Bird Food - Rs.80</option>
+</select><br><br>
+
+Quantity: <input type="number" id="qty"><br><br>
+
+<button id="orderBtn">Calculate Order</button>
+<p id="orderResult"></p>
+</div>
+
+<div class="box">
+<h2>3. Pet Appearance Customizer</h2>
+
+Pet Color:
+<select id="petColor">
+<option value="brown">Brown</option>
+<option value="black">Black</option>
+<option value="orange">Orange</option>
+</select><br><br>
+
+Collar Color:
+<select id="collarColor">
+<option value="pink">Pink</option>
+<option value="red">Red</option>
+<option value="blue">Blue</option>
+</select><br><br>
+
+Pet Size:
+<select id="petSize">
+<option value="20">Small</option>
+<option value="35">Medium</option>
+<option value="50">Large</option>
+</select><br><br>
+
+<div id="pet" style="display:inline-block; padding:15px; background-color:pink; font-size:35px;">
+🐕 PET
+</div>
+</div>
+
+</body>
+</html>
